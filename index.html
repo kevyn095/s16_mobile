@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoPlanner — Tarefas acessíveis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo principal</a>
+  <div class="container">
+    <header class="panel" role="banner">
+      <h1>EcoPlanner <span aria-hidden="true">🍂</span></h1>
+      <p id="intro">Página de gerenciamento de tarefas com design responsivo, suporte a acessibilidade (uso de ARIA), navegação completa por teclado e opção de alto contraste    .</p>
+      <div class="toolbar" role="toolbar" aria-label="Ações principais">
+        <button id="toggleForm" class="btn brand" aria-controls="sec-form" aria-expanded="false">Adicionar tarefa</button>
+        <div class="filters" role="group" aria-label="Filtro de status">
+          <span class="sr-only" id="lbl-filtros">Filtros</span>
+          <button class="btn ghost" data-filter="all" aria-pressed="true">Todas</button>
+          <button class="btn ghost" data-filter="active" aria-pressed="false">Ativas</button>
+          <button class="btn ghost" data-filter="done" aria-pressed="false">Concluídas</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo" class="layout" role="main" aria-describedby="intro">
+      <section class="panel" aria-labelledby="h-tarefas">
+        <h2 id="h-tarefas">Minhas tarefas</h2>
+        <p class="help">Dica: use Tab/Shift+Tab para navegar; Espaço marca como concluída.</p>
+        <ul id="lista" class="tasks" aria-live="polite"></ul>
+      </section>
+
+      <section id="sec-form" class="panel" aria-labelledby="h-adicionar" hidden>
+        <h2 id="h-adicionar">Nova tarefa</h2>
+        <form id="form">
+          <div class="field">
+            <label for="titulo">Título <span aria-hidden="true">*</span></label>
+            <input id="titulo" name="titulo" type="text" required aria-required="true" placeholder="Ex.: Levar ecobag ao mercado" />
+          </div>
+          <div class="row cols-2">
+            <div class="field">
+              <label for="categoria">Categoria</label>
+              <select id="categoria" name="categoria">
+                <option>Rotina</option>
+                <option>Compras</option>
+                <option>Transporte</option>
+                <option>Casa</option>
+                <option>Estudos</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="prazo">Prazo</label>
+              <input id="prazo" name="prazo" type="date" />
+            </div>
+          </div>
+
+          <fieldset class="field" role="radiogroup" aria-labelledby="lbl-prio">
+            <legend id="lbl-prio">Prioridade</legend>
+            <div class="radios">
+              <label><input type="radio" name="prioridade" value="Baixa" checked /> Baixa</label>
+              <label><input type="radio" name="prioridade" value="Média" /> Média</label>
+              <label><input type="radio" name="prioridade" value="Alta" /> Alta</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="notas">Notas (opcional)</label>
+            <textarea id="notas" name="notas" rows="3" placeholder="Dica sustentável, materiais reaproveitados, etc."></textarea>
+            <p class="help">Exemplo: “Ir ao mercado com ecobag para reduzir plásticos.”</p>
+          </div>
+
+          <div class="field">
+            <label><input id="sustentavel" name="sustentavel" type="checkbox" /> Hábito sustentável</label>
+          </div>
+
+          <div class="field">
+            <button class="btn brand" type="submit">Salvar tarefa</button>
+            <p class="help">O botão “Adicionar tarefa” acima colapsa/expande este formulário (usa <code>aria-expanded</code>).</p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div id="status" role="status" aria-live="polite" class="sr-only"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
